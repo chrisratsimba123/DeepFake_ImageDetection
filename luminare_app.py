@@ -5,12 +5,9 @@ Created on Sat Nov 18 11:17:46 2023
 
 @author: ratsimbazafy
 """
-pip3 install streamlit
-pip3 install pyngrok
-
 import streamlit as st
 import requests
-from pyngrok import ngrok
+import ngrok
 import os
 
 def main():
