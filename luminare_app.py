@@ -7,7 +7,7 @@ Created on Sat Nov 18 11:17:46 2023
 """
 import streamlit as st
 import requests
-import ngrok
+from pyngrok import ngrok
 import os
 
 def main():
