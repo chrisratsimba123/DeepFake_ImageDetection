@@ -7,8 +7,9 @@ Created on Sat Nov 18 11:17:46 2023
 """
 import streamlit as st
 import requests
-from pyngrok import ngrok
 import os
+
+os.system('pip3 install pyngrok')
 
 def main():
     st.title('Luminare - DeepFake Image Detection')
@@ -33,7 +34,9 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+
+from pyngrok import ngrok
+
 # Terminate open tunnels if exist
 ngrok.kill()
 
