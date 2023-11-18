@@ -5,7 +5,8 @@ Created on Sat Nov 18 11:17:46 2023
 
 @author: ratsimbazafy
 """
-
+!pip3 install streamlit
+!pip3 install pyngrok
 import streamlit as st
 import requests
 from pyngrok import ngrok
@@ -23,7 +24,7 @@ def main():
         # Replace 'API_ENDPOINT' and 'API_KEY' with API details
         # response = requests.post('API_ENDPOINT', files={'image': uploaded_file}, headers={'Authorization': 'Bearer API_KEY'})
 
-        # For demonstration, let's assume the API response is a dummy dictionary
+        # Sample API Response
         response = {'status': 'Success', 'result': 'Real'}
 
         if response['status'] == 'Success':
