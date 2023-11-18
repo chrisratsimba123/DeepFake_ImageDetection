@@ -35,12 +35,12 @@ def main():
 if __name__ == "__main__":
     main()
 
-from pyngrok import ngrok
+# from pyngrok import ngrok
 
 # Terminate open tunnels if exist
-ngrok.kill()
+# ngrok.kill()
 
 # Setup a new ngrok tunnel for the Streamlit app
-public_url = ngrok.connect(8501)
-print(f"Streamlit app is running at: {public_url}")
+# public_url = ngrok.connect(8501)
+# print(f"Streamlit app is running at: {public_url}")
     
