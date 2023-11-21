@@ -15,7 +15,7 @@ pyspng==0.1.1
 Requests==2.31.0
 scipy==1.11.4
 setuptools==63.2.0
-streamlit==1.27.2
-tensorflow==2.10.0
+streamlit
+tensorflow
 torch==2.1.1
 tqdm==4.65.0
