@@ -11,7 +11,7 @@ Created on Sat Nov 18 11:17:46 2023
 import streamlit as st
 from PIL import Image
 import requests
-from pyngrok import ngrok
+# from pyngrok import ngrok
 import os
 # from process import predict_img
 import tensorflow as tf
