@@ -75,6 +75,11 @@ def image_guessing_game():
     real_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/valid/real'
     fake_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/valid/fake'
 
+    # Check if directories exist
+    if not os.path.exists(real_images_dir) or not os.path.exists(fake_images_dir):
+        st.error("Image directories not found. Please check the paths.")
+        return
+
     real_images = [img for img in os.listdir(real_images_dir) if os.path.isfile(os.path.join(real_images_dir, img))]
     fake_images = [img for img in os.listdir(fake_images_dir) if os.path.isfile(os.path.join(fake_images_dir, img))]
 
