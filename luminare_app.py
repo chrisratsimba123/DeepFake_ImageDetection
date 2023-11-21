@@ -12,7 +12,7 @@ import streamlit as st
 from PIL import Image
 import requests
 import os
-os.system('pip3 install tensorflow')
+os.system('pip3 install -r requirements.txt')
 import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
