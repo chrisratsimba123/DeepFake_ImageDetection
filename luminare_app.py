@@ -11,12 +11,14 @@ Created on Sat Nov 18 11:17:46 2023
 import streamlit as st
 from PIL import Image
 import requests
+
+os.system('pip3 install pyngrok')
+os.system('pip3 install tensorflow')
+
 # from pyngrok import ngrok
 import os
 # from process import predict_img
 import tensorflow as tf
-
-os.system('pip3 install pyngrok')
 
 execution_path = os.getcwd()
 print(execution_path)
