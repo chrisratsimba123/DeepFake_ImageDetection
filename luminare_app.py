@@ -23,7 +23,7 @@ def predict_img(filename):
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
     image_height = 256
     image_width = 256
-    model_path = "/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/BaselineModel"
+    model_path = "/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline"
 
     loaded_model = tf.saved_model.load(model_path, tags=['serve'])
     class_names = ['fake', 'real']
