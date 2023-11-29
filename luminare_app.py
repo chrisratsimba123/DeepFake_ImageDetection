@@ -172,30 +172,6 @@ def main():
         st.header('Spot the Fake!')
         image_guessing_game()
 
-def main():
-    st.title('Luminare - Face Image Verification')
-
-    uploaded_file = st.file_uploader("Upload an image of a human face to check if it's real or AI-generated", type=["jpg", "jpeg", "png"])
-
-    if uploaded_file is not None:
-        # Display the uploaded image
-        st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
-
-        # Replace with your actual API endpoint and key
-        # response = requests.post('API_ENDPOINT', files={'image': uploaded_file}, headers={'Authorization': 'Bearer API_KEY'})
-
-        # For demonstration, let's assume the API response is a dummy dictionary
-        response = {'status': 'Success', 'result': 'Real'}
-
-        if response['status'] == 'Success':
-            result = response['result']
-            st.success(f'Verification Complete: The image is {result}')
-        else:
-            st.error('Failed to verify the image')
-
-if __name__ == "__main__":
-    main()
-
 if __name__ == "__main__":
     main()
 
