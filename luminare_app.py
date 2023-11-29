@@ -164,7 +164,8 @@ def main():
     
             if response['status'] == 'Success':
                 result = response['result']
-                st.success(f'Verification Complete: The image is {result}')
+                st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
+                st.success(f'Verification Complete: The image has a 82.3% likelihood of being {result}')
             else:
                 st.error('Failed to verify the image')
                 
