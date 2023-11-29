@@ -72,8 +72,8 @@ def load_css():
 def image_guessing_game():
     
     # Paths to the directories containing real and fake images
-    real_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/train/real'
-    fake_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/train/fake'
+    real_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/valid/real'
+    fake_images_dir = '/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/140K-RealFakeImages/real_vs_fake/real-vs-fake/valid/fake'
 
     # Check if directories exist
     # if not os.path.exists(real_images_dir) or not os.path.exists(fake_images_dir):
