@@ -23,9 +23,10 @@ def predict_img(filename):
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
     image_height = 256
     image_width = 256
-    model_path = "/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline"
+    model_path = "/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/CNN/CNN_base.h5"
 
-    loaded_model = tf.saved_model.load(model_path, tags=['serve'])
+    # loaded_model = tf.saved_model.load(model_path, tags=['serve'])
+    loaded_model = tf.keras.models.load_model(model_path)
     class_names = ['fake', 'real']
 
     img = tf.keras.utils.load_img(filename, target_size=(image_height, image_width))
@@ -156,24 +157,24 @@ def main():
         if uploaded_file is not None:
             # Display the uploaded image
     
-            # response = predict_img(uploaded_file)
+            response = predict_img(uploaded_file)
             
-            # if response is not none:
-                # st.success(f'Verification Complete: The image is {response[0]} with a {response[1]} % confidence')
-                # st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-            
-            # else:
-                # st.error('Failed to verify the image')
-
-            # For demonstration, let's assume the API response is a dummy dictionary
-            response = {'status': 'Success', 'result': 'Real'}
-    
-            if response['status'] == 'Success':
-                result = response['result']
+            if response is not none:
+                st.success(f'Verification Complete: The image is {response[0]} with a {response[1]} % confidence')
                 st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-                st.success(f'Verification Complete: The image has a 82.3% likelihood of being {result}')
+            
             else:
                 st.error('Failed to verify the image')
+
+            # For demonstration, let's assume the API response is a dummy dictionary
+            # response = {'status': 'Success', 'result': 'Real'}
+    
+            # if response['status'] == 'Success':
+                # result = response['result']
+                # st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
+                # st.success(f'Verification Complete: The image has a 82.3% likelihood of being {result}')
+            # else:
+                # st.error('Failed to verify the image')
                 
     with tab2:
         st.header('Spot the Fake!')
