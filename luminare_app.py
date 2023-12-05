@@ -177,7 +177,7 @@ def image_guessing_game():
             # st.session_state.correct_answers.clear()
             # random.shuffle(all_images)
             # st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
-                                                all_images}
+            #                                     all_images}
 
 def reset_game():
     st.session_state.current_image = 0
