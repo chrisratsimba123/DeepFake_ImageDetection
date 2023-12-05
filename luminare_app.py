@@ -107,7 +107,7 @@ def image_guessing_game():
     st.write("<style>div.row-widget.stRadio > div{flex-direction:row;justify-content: center;}</style>", unsafe_allow_html=True)
     st.write("<style>div.stButton > button:first-child {margin: 0 auto;}</style>", unsafe_allow_html=True)
     
-    if st.session_state.current_image < 10:  # Ensure only 10 images in total
+    if st.session_state.current_image < 6:  # Ensure only 6 images in total
         image_name = all_images[st.session_state.current_image]
         image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
         if not os.path.exists(image_path):
