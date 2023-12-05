@@ -23,10 +23,10 @@ def predict_img(filename):
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
     image_height = 256
     image_width = 256
-    model_path = "/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/CNN/CNN_base.h5"
+    model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models")
 
     # loaded_model = tf.saved_model.load(model_path, tags=['serve'])
-    loaded_model = tf.keras.models.load_model(model_path)
+    loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
     img = tf.keras.utils.load_img(filename, target_size=(image_height, image_width))
