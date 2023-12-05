@@ -171,6 +171,7 @@ def about_us():
     <style>
     .team-member {
         text-align: center;
+        margin-top: 30px;
     }
     </style>
     """, unsafe_allow_html=True)
