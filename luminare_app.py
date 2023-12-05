@@ -92,12 +92,12 @@ def image_guessing_game():
     fake_images = [img for img in os.listdir(fake_images_dir) if os.path.isfile(os.path.join(fake_images_dir, img))]
 
     # Ensure there are enough images
-    if len(real_images) < 3 or len(fake_images) < 3:
+    if len(real_images) < 5 or len(fake_images) < 5:
         st.error("Insufficient images in directories")
         return
 
-    selected_real_images = random.sample(real_images, 3)
-    selected_fake_images = random.sample(fake_images, 3)
+    selected_real_images = random.sample(real_images, 5)
+    selected_fake_images = random.sample(fake_images, 5)
 
     all_images = selected_real_images + selected_fake_images
     random.shuffle(all_images)
@@ -111,19 +111,19 @@ def image_guessing_game():
     # Center the header and images
     st.write("<style>div.row-widget.stRadio > div{flex-direction:row;justify-content: center;}</style>", unsafe_allow_html=True)
     st.write("<style>div.stButton > button:first-child {margin: 0 auto;}</style>", unsafe_allow_html=True)
-    
-    if st.session_state.current_image < len(all_images):
+
+    if st.session_state.current_image < 10: # Ensure only 10 images in total
         image_name = all_images[st.session_state.current_image]
         image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir,
                                   image_name)
-
+        
         if not os.path.exists(image_path):
             st.error(f"Image not found: {image_path}")
             return
 
-        st.image(image_path, caption=f'Image {st.session_state.current_image + 1}')
+        st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
 
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([1,1])
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Real':
