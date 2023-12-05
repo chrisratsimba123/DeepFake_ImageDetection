@@ -99,35 +99,37 @@ def image_guessing_game():
     if 'current_image' not in st.session_state:
         st.session_state.current_image = 0
         st.session_state.score = 0
-        st.session_state.correct_answers = {}
-        for img in all_images:
-            img_path = os.path.join(real_images_dir if img in selected_real_images else fake_images_dir, img)
-            if os.path.exists(img_path):
-                st.session_state.correct_answers[img] = 'Real' if img in selected_real_images else 'Fake'
-            else:
-                st.error(f"Missing image file: {img_path}")
+        st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
+                                            all_images}
 
     if st.session_state.current_image < len(all_images):
         image_name = all_images[st.session_state.current_image]
-        image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
+        image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir,
+                                  image_name)
 
         if not os.path.exists(image_path):
             st.error(f"Image not found: {image_path}")
             return
 
         st.image(image_path, caption=f'Image {st.session_state.current_image + 1}')
-        
+
         col1, col2 = st.columns(2)
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Real':
+                    st.success("Correct!")
                     st.session_state.score += 1
+                else:
+                    st.success("Incorrect! Image is Fake")
                 st.session_state.current_image += 1
 
         with col2:
-            if st.button('AI-Generated', key=f'fake_{st.session_state.current_image}'):
+            if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Fake':
                     st.session_state.score += 1
+                    st.success("Correct!")
+                else:
+                    st.success("Incorrect! Image is Real")
                 st.session_state.current_image += 1
 
     else:
@@ -137,49 +139,89 @@ def image_guessing_game():
             st.session_state.score = 0
             st.session_state.correct_answers.clear()
             random.shuffle(all_images)
-            st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in all_images}
+            st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
+                                                all_images}
+
+def about_us():
+    st.title("About Us - Deepfake Detection Service")
+
+    st.write(
+        "Welcome to our Deepfake Detection Service! We are a team of dedicated individuals "
+        "committed to leveraging our expertise in Data Science to address the challenges posed "
+        "by deepfake technology. Our team is comprised of three highly skilled graduate students "
+        "from the renowned UC Berkeley, all graduating with master's degrees in Data Science."
+    )
+    st.header("Our Mission")
+
+    st.write(
+        "At our core, we are driven by the mission to combat the rise of deepfake technology. "
+        "Our focus is on developing cutting-edge solutions that empower individuals and organizations "
+        "to detect and mitigate the impact of manipulated media. We believe in the responsible use of technology "
+        "and strive to create a safer digital environment for everyone."
+    )
+
+    st.header("Meet the Team")
+
+    # Information about each team member
+    team_members = [
+        {"name": "Saket Suman", "role": "Co-Founder & Data Scientist", "image": "Team/saket.jpg"},
+        {"name": "Chris Ratsimbazafy", "role": "Co-Founder & Machine Learning Engineer", "image": "Team/cards.jpeg"},
+        {"name": "Cheick Sissoko", "role": "Co-Founder & Software Engineer", "image": "Team/cheick.jpeg"}
+    ]
+
+    for member in team_members:
+        st.subheader(member["name"])
+        st.image(member["image"], caption=f"{member['role']}")
+        st.write(
+            f"{member['name']} is our {member['role']} with a strong background in Data Science. "
+            "They have demonstrated exceptional skills and dedication throughout their academic journey at UC Berkeley."
+        )
+
+    st.header("Contact Us")
+
+    st.write(
+        "If you have any questions or would like to learn more about our deepfake detection service, please feel free "
+        "to reach out to us at [contact@example.com](mailto:contact@example.com). We appreciate your interest and look "
+        "forward to collaborating with you in the fight against deepfake threats."
+    )
 
 def main():
     load_css()
     st.title('Luminare')
-    
-    tab1, tab2 = st.tabs(['DeepFake Detection', 'Spot the Fake!'])
-    
+
+    tab1, tab2, tab3 = st.tabs(['DeepFake Detection', 'Spot the Fake!', 'About Us'])
+
     with tab1:
         st.header("Unveil the Authentic You")
-        st.markdown("At Luminare, we believe in the power of truth and authenticity. In a world filled with filters and "
-                    "digital enhancements, it's becoming increasingly challenging to distinguish between real and fake. "
-                    "That's where we come in.")
-        
+        st.markdown(
+            "At Luminare, we believe in the power of truth and authenticity. In a world filled with filters and "
+            "digital enhancements, it's becoming increasingly challenging to distinguish between real and fake. "
+            "That's where we come in.")
+
         st.header("Verify the Authenticity of Your Image")
-    
-        uploaded_file = st.file_uploader("Upload an image of a human face to check if it's real or AI-generated", type=["jpg", "jpeg", "png"])
-    
+
+        uploaded_file = st.file_uploader("Upload an image of a human face to check if it's real or AI-generated",
+                                         type=["jpg", "jpeg", "png"])
+
         if uploaded_file is not None:
             # Display the uploaded image
-    
+
             response = predict_img(uploaded_file)
-            
-            if response is not none:
+
+            if response is not None:
                 st.success(f'Verification Complete: The image is {response[0]} with a {response[1]} % confidence')
                 st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-            
+
             else:
                 st.error('Failed to verify the image')
 
-            # For demonstration, let's assume the API response is a dummy dictionary
-            # response = {'status': 'Success', 'result': 'Real'}
-    
-            # if response['status'] == 'Success':
-                # result = response['result']
-                # st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-                # st.success(f'Verification Complete: The image has a 82.3% likelihood of being {result}')
-            # else:
-                # st.error('Failed to verify the image')
-                
     with tab2:
         st.header('Spot the Fake!')
         image_guessing_game()
+
+    with tab3:
+        st.header('About Us')
+        about_us()
 
 if __name__ == "__main__":
     main()
