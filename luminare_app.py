@@ -126,15 +126,6 @@ def image_guessing_game():
         # correct_answer = st.session_state.correct_answers.get(image_name)
         col1, col2 = st.columns([1, 1], gap='medium')
         # made_choice = False  # Flag to track if a choice was made
-
-    def evaluate_choice(user_choice, image_name):
-        correct_answer = st.session_state.correct_answers.get(image_name)
-        if user_choice == correct_answer:
-            st.success("Correct!")
-            st.session_state.score += 1
-        else:
-            st.error(f"Incorrect! Image is {correct_answer}")
-        st.session_state.current_image += 1
         
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
@@ -166,6 +157,15 @@ def image_guessing_game():
         if st.button('Restart Game'):
             reset_game()
             # st.session_state.correct_answers.clear()
+
+def evaluate_choice(user_choice, image_name):
+        correct_answer = st.session_state.correct_answers.get(image_name)
+        if user_choice == correct_answer:
+            st.success("Correct!")
+            st.session_state.score += 1
+        else:
+            st.error(f"Incorrect! Image is {correct_answer}")
+        st.session_state.current_image += 1
 
 def about_us():
     st.title("About Us - Deepfake Detection Service")
