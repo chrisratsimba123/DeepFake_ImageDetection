@@ -1,2 +1,2 @@
-# deepfake_image_detection
+# DeepFake Image Detection
 W210 Capstone Project
