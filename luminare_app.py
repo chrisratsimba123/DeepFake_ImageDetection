@@ -27,7 +27,7 @@ def predict_img(filename):
     # model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline/")
     model_path = os.getcwd()
 
-    loaded_model = tf.saved_model.load(export_dir=os.path.join(model_path, "Models/Baseline"), tags=['serve'])
+    loaded_model = tf.saved_model.load(export_dir=os.path.join(model_path, "Models/"), tags=['serve'])
     # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
