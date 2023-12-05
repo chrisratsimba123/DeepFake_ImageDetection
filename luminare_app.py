@@ -17,6 +17,7 @@ import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
 import plotly.express as px
+import numpy as np
 
 # prediction output
 def predict_img(filename):
