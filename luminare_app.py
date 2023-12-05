@@ -32,7 +32,6 @@ def predict_img(filename):
     # Load the model
     loaded_model = tf.keras.models.load_model(model_path)
     # loaded_model = tf.saved_model.load(export_dir=os.path.join(os.getcwd(), "Models", "CNN_base.h5"), tags=['serve'])
-    # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
     img = tf.keras.utils.load_img(filename, target_size=(image_height, image_width))
@@ -42,8 +41,6 @@ def predict_img(filename):
     predictions = loaded_model(img_array)
     score = tf.nn.softmax(predictions[0])
     d = [class_names[np.argmax(score)], round(100 * np.max(score), 2)]
-    # os.remove(target)  # delete temporary file
-
     return d
 
 # Function to resize the image
@@ -102,14 +99,7 @@ def image_guessing_game():
     all_images = selected_real_images + selected_fake_images
     random.shuffle(all_images)
 
-    # def reset_game():
-        # st.session_state.current_image = 0
-        # st.session_state.score = 0
-        # random.shuffle(all_images)
-        # st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in all_images}
-
     if 'current_image' not in st.session_state:
-        # reset_game()
         st.session_state.current_image = 0
         st.session_state.score = 0
         st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
@@ -118,26 +108,8 @@ def image_guessing_game():
     # Center the header and images
     st.write("<style>div.row-widget.stRadio > div{flex-direction:row;justify-content: center;}</style>", unsafe_allow_html=True)
     st.write("<style>div.stButton > button:first-child {margin: 0 auto;}</style>", unsafe_allow_html=True)
-
-    # def display_current_image():
-        # image_name = all_images[st.session_state.current_image]
-        # image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
-        # if not os.path.exists(image_path):
-            # st.error(f"Image not found: {image_path}")
-            # return
-       #  st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
-
-    # def evaluate_choice(user_choice):
-        # image_name = all_images[st.session_state.current_image]
-        # correct_answer = st.session_state.correct_answers.get(image_name)
-        # if user_choice == correct_answer:
-            # st.success("Correct!")
-            # st.session_state.score += 1
-        # else:
-            # st.error(f"Incorrect! Image is {correct_answer}")
     
     if st.session_state.current_image < 10:  # Ensure only 10 images in total
-        # display_current_image()
         image_name = all_images[st.session_state.current_image]
         image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
 
@@ -153,29 +125,12 @@ def image_guessing_game():
         
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
-                # evaluate_choice('Real')
                 made_choice = True
                 if st.session_state.correct_answers.get(image_name) == 'Real':
                     st.success("Correct!")
                     st.session_state.score += 1
                 else:
                     st.error("Incorrect! Image is Fake")
-
-        # if col1.button('Real', key=f'real_{st.session_state.current_image}'):
-            # if correct_answer == 'Real':
-                # st.success("Correct!")
-                # st.session_state.score += 1
-            # else:
-                # st.error("Incorrect! Image is Fake")
-            # st.session_state.current_image += 1
-
-        # if col2.button('Fake', key=f'fake_{st.session_state.current_image}'):
-            # if correct_answer == 'Fake':
-                # st.success("Correct!")
-                 #st.session_state.score += 1
-            # else:
-                # st.error("Incorrect! Image is Fake")
-            # st.session_state.current_image += 1
 
         with col2:
             if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
@@ -194,13 +149,12 @@ def image_guessing_game():
     else:
         st.write(f'Game Over! Your score: {st.session_state.score} out of {len(all_images)}')
         if st.button('Restart Game'):
-            reset_game()
-            # st.session_state.current_image = 0
-            # st.session_state.score = 0
-            # st.session_state.correct_answers.clear()
-            # random.shuffle(all_images)
-            # st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
-            #                                     all_images}
+            st.session_state.current_image = 0
+            st.session_state.score = 0
+            st.session_state.correct_answers.clear()
+            random.shuffle(all_images)
+            st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
+                                                 all_images}
 
 def about_us():
     st.title("About Us - Deepfake Detection Service")
