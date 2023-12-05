@@ -24,7 +24,7 @@ def predict_img(filename):
     image_height = 256
     image_width = 256
     # model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models")
-    model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline")
+    model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline/")
 
     loaded_model = tf.saved_model.load(model_path, tags=['serve'])
     # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
