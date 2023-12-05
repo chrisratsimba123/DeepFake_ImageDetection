@@ -145,44 +145,37 @@ def image_guessing_game():
 def main():
     load_css()
     st.title('Luminare')
-    
+
     tab1, tab2 = st.tabs(['DeepFake Detection', 'Spot the Fake!'])
-    
+
     with tab1:
         st.header("Unveil the Authentic You")
-        st.markdown("At Luminare, we believe in the power of truth and authenticity. In a world filled with filters and "
-                    "digital enhancements, it's becoming increasingly challenging to distinguish between real and fake. "
-                    "That's where we come in.")
-        
+        st.markdown(
+            "At Luminare, we believe in the power of truth and authenticity. In a world filled with filters and "
+            "digital enhancements, it's becoming increasingly challenging to distinguish between real and fake. "
+            "That's where we come in.")
+
         st.header("Verify the Authenticity of Your Image")
-    
-        uploaded_file = st.file_uploader("Upload an image of a human face to check if it's real or AI-generated", type=["jpg", "jpeg", "png"])
-    
+
+        uploaded_file = st.file_uploader("Upload an image of a human face to check if it's real or AI-generated",
+                                         type=["jpg", "jpeg", "png"])
+
         if uploaded_file is not None:
             # Display the uploaded image
-    
+
             response = predict_img(uploaded_file)
-            
-            if response is not none:
+
+            if response is not None:
                 st.success(f'Verification Complete: The image is {response[0]} with a {response[1]} % confidence')
                 st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-            
+
             else:
                 st.error('Failed to verify the image')
 
-            # For demonstration, let's assume the API response is a dummy dictionary
-            # response = {'status': 'Success', 'result': 'Real'}
-    
-            # if response['status'] == 'Success':
-                # result = response['result']
-                # st.image(uploaded_file, caption='Uploaded Image', use_column_width=True, width=10)
-                # st.success(f'Verification Complete: The image has a 82.3% likelihood of being {result}')
-            # else:
-                # st.error('Failed to verify the image')
-                
     with tab2:
         st.header('Spot the Fake!')
         image_guessing_game()
+
 
 if __name__ == "__main__":
     main()
