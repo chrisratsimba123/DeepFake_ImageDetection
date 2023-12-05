@@ -127,7 +127,7 @@ def image_guessing_game():
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
                 made_choice = True
-                if st.session_state.correct_answers[image_name] == 'Real':
+                if st.session_state.correct_answers.get(image_name) == 'Real':
                     st.success("Correct!")
                     st.session_state.score += 1
                 else:
