@@ -25,7 +25,7 @@ def predict_img(filename):
     image_width = 256
     path = os.getcwd()
 
-    loaded_model = tf.saved_model.load(export_dir=os.path.join(path, "Models/saved_model.pb"), tags=['serve'])
+    loaded_model = tf.saved_model.load(export_dir=os.path.join(path, "Models"), tags=['serve'])
     # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
