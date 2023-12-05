@@ -128,7 +128,7 @@ def image_guessing_game():
         st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
 
     def evaluate_choice(user_choice):
-        correct_answer = st.session_state.correct_answers[all_images[st.session_state.current_image]]
+        correct_answer = st.session_state.correct_answers.get(all_images[st.session_state.current_image])
         if user_choice == correct_answer:
             st.success("Correct!")
             st.session_state.score += 1
