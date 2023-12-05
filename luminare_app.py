@@ -159,13 +159,17 @@ def image_guessing_game():
             # st.session_state.correct_answers.clear()
 
 def evaluate_choice(user_choice, image_name):
-        correct_answer = st.session_state.correct_answers.get(image_name)
+    # Check if image_name is in the dictionary
+    if image_name in st.session_state.correct_answers:
+        correct_answer = st.session_state.correct_answers[image_name]
         if user_choice == correct_answer:
             st.success("Correct!")
             st.session_state.score += 1
         else:
             st.error(f"Incorrect! Image is {correct_answer}")
-        st.session_state.current_image += 1
+    else:
+        st.error("Error: Image name not found in answers.")
+    st.session_state.current_image += 1
 
 def about_us():
     st.title("About Us - Deepfake Detection Service")
