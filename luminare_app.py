@@ -122,36 +122,54 @@ def image_guessing_game():
 
         st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
 
+        correct_answer = st.session_state.correct_answers.get(image_name)
         col1, col2 = st.columns([1, 1])
-        made_choice = False  # Flag to track if a choice was made
-        with col1:
-            if st.button('Real', key=f'real_{st.session_state.current_image}'):
-                made_choice = True
-                if st.session_state.correct_answers.get(image_name) == 'Real':
-                    st.success("Correct!")
-                    st.session_state.score += 1
-                else:
-                    st.error("Incorrect! Image is Fake")
+        # made_choice = False  # Flag to track if a choice was made
+        
+        # with col1:
+            # if st.button('Real', key=f'real_{st.session_state.current_image}'):
+                # made_choice = True
+                # if st.session_state.correct_answers.get(image_name) == 'Real':
+                    # st.success("Correct!")
+                    # st.session_state.score += 1
+                # else:
+                    # st.error("Incorrect! Image is Fake")
 
-        with col2:
-            if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
-                made_choice = True
-                if st.session_state.correct_answers.get(image_name) == 'Fake':
-                    st.success("Correct!")
-                    st.session_state.score += 1
-                else:
-                    st.error("Incorrect! Image is Real")
+        if col1.button('Real', key=f'real_{st.session_state.current_image}'):
+            if correct_answer == 'Real':
+                st.success("Correct!")
+                st.session_state.score += 1
+            else:
+                st.error("Incorrect! Image is Fake")
+            st.session_state.current_image += 1
+
+        if col2.button('Fake', key=f'fake_{st.session_state.current_image}'):
+            if correct_answer == 'Fake':
+                st.success("Correct!")
+                st.session_state.score += 1
+            else:
+                st.error("Incorrect! Image is Fake")
+            st.session_state.current_image += 1
+
+        # with col2:
+            # if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
+                # made_choice = True
+                # if st.session_state.correct_answers.get(image_name) == 'Fake':
+                    # st.success("Correct!")
+                    # st.session_state.score += 1
+                # else:
+                    # st.error("Incorrect! Image is Real")
 
         # Increment the current image index after a choice is made
-        if made_choice:
-            st.session_state.current_image += 1
+        # if made_choice:
+            # st.session_state.current_image += 1
 
     else:
         st.write(f'Game Over! Your score: {st.session_state.score} out of {len(all_images)}')
         if st.button('Restart Game'):
             st.session_state.current_image = 0
             st.session_state.score = 0
-            st.session_state.correct_answers.clear()
+            # st.session_state.correct_answers.clear()
             random.shuffle(all_images)
             st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
                                                 all_images}
