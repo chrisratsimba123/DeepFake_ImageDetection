@@ -124,23 +124,28 @@ def image_guessing_game():
         st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
 
         col1, col2 = st.columns([1,1])
+        made_choice = False # Flag to track if a choice was made
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
+                made_choice = True
                 if st.session_state.correct_answers.get(image_name) == 'Real':
                     st.success("Correct!")
                     st.session_state.score += 1
                 else:
                     st.success("Incorrect! Image is Fake")
-                st.session_state.current_image += 1
 
         with col2:
             if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
+                made_choice = True
                 if st.session_state.correct_answers.get(image_name) == 'Fake':
                     st.session_state.score += 1
                     st.success("Correct!")
                 else:
                     st.success("Incorrect! Image is Real")
-                st.session_state.current_image += 1
+
+        # Increment the current image index after a choice is made
+        if made_choice:
+            st.session_state.current_image += 1
 
     else:
         st.write(f'Game Over! Your score: {st.session_state.score} out of {len(all_images)}')
