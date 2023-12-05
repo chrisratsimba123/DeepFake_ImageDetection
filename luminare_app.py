@@ -166,7 +166,7 @@ def image_guessing_game():
                 # st.session_state.score += 1
             # else:
                 # st.error("Incorrect! Image is Fake")
-            st.session_state.current_image += 1
+            # st.session_state.current_image += 1
 
         # if col2.button('Fake', key=f'fake_{st.session_state.current_image}'):
             # if correct_answer == 'Fake':
