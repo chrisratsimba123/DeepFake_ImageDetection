@@ -128,7 +128,7 @@ def image_guessing_game():
         # made_choice = False  # Flag to track if a choice was made
 
         def evaluate_choice(user_choice, image_name):
-            correct_answer = st.session_state.correct_answers[image_name]
+            correct_answer = st.session_state.correct_answers.get(image_name)
             if user_choice == correct_answer:
                 st.success("Correct!")
                 st.session_state.score += 1
