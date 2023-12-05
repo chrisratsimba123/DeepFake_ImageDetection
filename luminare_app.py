@@ -99,35 +99,37 @@ def image_guessing_game():
     if 'current_image' not in st.session_state:
         st.session_state.current_image = 0
         st.session_state.score = 0
-        st.session_state.correct_answers = {}
-        for img in all_images:
-            img_path = os.path.join(real_images_dir if img in selected_real_images else fake_images_dir, img)
-            if os.path.exists(img_path):
-                st.session_state.correct_answers[img] = 'Real' if img in selected_real_images else 'Fake'
-            else:
-                st.error(f"Missing image file: {img_path}")
+        st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
+                                            all_images}
 
     if st.session_state.current_image < len(all_images):
         image_name = all_images[st.session_state.current_image]
-        image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
+        image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir,
+                                  image_name)
 
         if not os.path.exists(image_path):
             st.error(f"Image not found: {image_path}")
             return
 
         st.image(image_path, caption=f'Image {st.session_state.current_image + 1}')
-        
+
         col1, col2 = st.columns(2)
         with col1:
             if st.button('Real', key=f'real_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Real':
+                    st.success("Correct!")
                     st.session_state.score += 1
+                else:
+                    st.success("Incorrect! Image is Fake")
                 st.session_state.current_image += 1
 
         with col2:
             if st.button('AI-Generated', key=f'fake_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Fake':
                     st.session_state.score += 1
+                    st.success("Correct!")
+                else:
+                    st.success("Incorrect! Image is Real")
                 st.session_state.current_image += 1
 
     else:
@@ -137,7 +139,8 @@ def image_guessing_game():
             st.session_state.score = 0
             st.session_state.correct_answers.clear()
             random.shuffle(all_images)
-            st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in all_images}
+            st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
+                                                all_images}
 
 def main():
     load_css()
