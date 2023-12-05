@@ -124,7 +124,7 @@ def image_guessing_game():
                 st.session_state.current_image += 1
 
         with col2:
-            if st.button('AI-Generated', key=f'fake_{st.session_state.current_image}'):
+            if st.button('Fake', key=f'fake_{st.session_state.current_image}'):
                 if st.session_state.correct_answers.get(image_name) == 'Fake':
                     st.session_state.score += 1
                     st.success("Correct!")
