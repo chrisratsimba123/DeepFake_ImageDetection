@@ -166,6 +166,15 @@ def about_us():
 
     st.header("Meet the Team")
 
+    # Center the text
+    st.markdown("""
+    <style>
+    .team-member {
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     # Information about each team member
     team_members = [
         {"name": "Saket Suman", "role": "Co-Founder & Data Scientist", "image": "Team/saket.jpg"},
@@ -173,13 +182,19 @@ def about_us():
         {"name": "Cheick Sissoko", "role": "Co-Founder & Software Engineer", "image": "Team/cheick.jpeg"}
     ]
 
+    # for member in team_members:
+        # st.subheader(member["name"])
+        # st.image(member["image"], caption=f"{member['role']}", width=256)
+        # st.write(
+            # f"{member['name']} is our {member['role']} with a strong background in Data Science. "
+            # "They have demonstrated exceptional skills and dedication throughout their academic journey at UC Berkeley."
+        # )
+
     for member in team_members:
-        st.subheader(member["name"])
-        st.image(member["image"], caption=f"{member['role']}", width=256)
-        st.write(
-            f"{member['name']} is our {member['role']} with a strong background in Data Science. "
-            "They have demonstrated exceptional skills and dedication throughout their academic journey at UC Berkeley."
-        )
+        # Centering each member's information
+        st.markdown(f"<div class='team-member'><h3>{member['name']}</h3></div>", unsafe_allow_html=True)
+        st.image(member["image"], caption=f"{member['role']}", width=256, use_column_width=True)
+        st.markdown(f"<div class='team-member'>{member['name']} is our {member['role']} with a strong background in Data Science. They have demonstrated exceptional skills and dedication throughout their academic journey at UC Berkeley.</div>", unsafe_allow_html=True)
 
     st.header("Contact Us")
 
