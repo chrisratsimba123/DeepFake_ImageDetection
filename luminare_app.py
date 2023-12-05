@@ -21,11 +21,16 @@ import plotly.express as px
 # prediction output
 def predict_img(filename):
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
-    image_height = 256
-    image_width = 256
-    path = os.getcwd()
+    image_height, image_width = 256, 256
+    model_path = os.path.join(os.getcwd(), "Models", "CNN_base.h5")
 
-    loaded_model = tf.saved_model.load(export_dir=os.path.join(path, "Models"), tags=['serve'])
+    # Check if the model file exists
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f'Model file not found at {model_path}')
+
+    # Load the model
+    loaded_model = tf.keras.models.load_model(model_path)
+    # loaded_model = tf.saved_model.load(export_dir=os.path.join(os.getcwd(), "Models", "CNN_base.h5"), tags=['serve'])
     # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
