@@ -147,7 +147,7 @@ def image_guessing_game():
                                                 all_images}
 
 def about_us():
-    st.title("About Us - Deepfake Detection Service")
+    st.title("Deepfake Detection Service")
 
     st.write(
         "Welcome to our Deepfake Detection Service! We are a team of dedicated individuals "
@@ -175,7 +175,7 @@ def about_us():
 
     for member in team_members:
         st.subheader(member["name"])
-        st.image(member["image"], caption=f"{member['role']}")
+        st.image(member["image"], caption=f"{member['role']}", width=256)
         st.write(
             f"{member['name']} is our {member['role']} with a strong background in Data Science. "
             "They have demonstrated exceptional skills and dedication throughout their academic journey at UC Berkeley."
