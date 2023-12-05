@@ -102,6 +102,12 @@ def image_guessing_game():
     all_images = selected_real_images + selected_fake_images
     random.shuffle(all_images)
 
+    def reset_game():
+        st.session_state.current_image = 0
+        st.session_state.score = 0
+        random.shuffle(all_images)
+        st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in all_images}
+
     if 'current_image' not in st.session_state:
         reset_game()
         # st.session_state.current_image = 0
@@ -113,6 +119,22 @@ def image_guessing_game():
     st.write("<style>div.row-widget.stRadio > div{flex-direction:row;justify-content: center;}</style>", unsafe_allow_html=True)
     st.write("<style>div.stButton > button:first-child {margin: 0 auto;}</style>", unsafe_allow_html=True)
 
+    def display_current_image():
+        image_name = all_images[st.session_state.current_image]
+        image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
+        if not os.path.exists(image_path):
+            st.error(f"Image not found: {image_path}")
+            return
+        st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
+
+    def evaluate_choice(user_choice):
+        correct_answer = st.session_state.correct_answers[all_images[st.session_state.current_image]]
+        if user_choice == correct_answer:
+            st.success("Correct!")
+            st.session_state.score += 1
+        else:
+            st.error(f"Incorrect! Image is {correct_answer}")
+    
     if st.session_state.current_image < 10:  # Ensure only 10 images in total
         display_current_image()
         # image_name = all_images[st.session_state.current_image]
@@ -178,28 +200,6 @@ def image_guessing_game():
             # random.shuffle(all_images)
             # st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in
             #                                     all_images}
-
-def reset_game():
-    st.session_state.current_image = 0
-    st.session_state.score = 0
-    random.shuffle(all_images)
-    st.session_state.correct_answers = {img: 'Real' if img in selected_real_images else 'Fake' for img in all_images}
-
-def display_current_image():
-    image_name = all_images[st.session_state.current_image]
-    image_path = os.path.join(real_images_dir if image_name in selected_real_images else fake_images_dir, image_name)
-    if not os.path.exists(image_path):
-        st.error(f"Image not found: {image_path}")
-        return
-    st.image(image_path, caption=f'Image {st.session_state.current_image + 1}', use_column_width=True)
-
-def evaluate_choice(user_choice):
-    correct_answer = st.session_state.correct_answers[all_images[st.session_state.current_image]]
-    if user_choice == correct_answer:
-        st.success("Correct!")
-        st.session_state.score += 1
-    else:
-        st.error(f"Incorrect! Image is {correct_answer}")
 
 def about_us():
     st.title("About Us - Deepfake Detection Service")
