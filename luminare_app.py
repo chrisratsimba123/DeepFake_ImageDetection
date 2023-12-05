@@ -25,9 +25,9 @@ def predict_img(filename):
     image_width = 256
     # model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models")
     # model_path = os.path.dirname("/Users/ratsimbazafy/Desktop/Data Science/MIDS/Fall23/W210/Models/Baseline/")
-    path = os.getcwd()
+    model_path = os.getcwd()
 
-    loaded_model = tf.saved_model.load(export_dir=os.path.join(path, "Models/"), tags=['serve'])
+    loaded_model = tf.saved_model.load(export_dir=os.path.join(model_path, "Models/"), tags=['serve'])
     # loaded_model = tf.keras.models.load_model(model_path+'/CNN/CNN_base.h5')
     class_names = ['fake', 'real']
 
@@ -75,8 +75,8 @@ def load_css():
 def image_guessing_game():
     
     # Paths to the directories containing real and fake images
-    real_images_dir = os.path.join(path, "Data/RealImages")
-    fake_images_dir = os.path.join(path, "Data/FakeImages")
+    real_images_dir = os.path.join(model_path, "Data/RealImages")
+    fake_images_dir = os.path.join(model_path, "Data/FakeImages")
 
     # Check if directories exist
     if not os.path.exists(real_images_dir) or not os.path.exists(fake_images_dir):
