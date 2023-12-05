@@ -164,7 +164,7 @@ def about_us():
 
     # Information about each team member
     team_members = [
-        {"name": "Saket Suman", "role": "Co-Founder & Data Scientist", "image": "Team/cards.jpeg"},
+        {"name": "Saket Suman", "role": "Co-Founder & Data Scientist", "image": "Team/saket.jpg"},
         {"name": "Chris Ratsimbazafy", "role": "Co-Founder & Machine Learning Engineer", "image": "Team/cards.jpeg"},
         {"name": "Cheick Sissoko", "role": "Co-Founder & Software Engineer", "image": "Team/cheick.jpeg"}
     ]
