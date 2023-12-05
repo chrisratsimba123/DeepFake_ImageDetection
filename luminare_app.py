@@ -228,7 +228,7 @@ def main():
 
             response = predict_img(uploaded_file)
             binary = ['Fake', 'Real']
-            scores = [81.6, 72.3, 64.1, 91.2, 88.9]
+            scores = [81.6, 72.3, 64.1, 91.2, 88.9, 77.9, 68.6, 60.4, 87.5, 85.2]
 
             if response is not None:
                 # st.success(f'Verification Complete: The image is {response[0]} with a {response[1]} % confidence')
